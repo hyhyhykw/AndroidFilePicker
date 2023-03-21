@@ -7,18 +7,18 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.*
 import android.os.Environment.MEDIA_MOUNTED
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.collection.ArrayMap
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.collection.ArrayMap
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import me.rosuh.filepicker.R.string
 import me.rosuh.filepicker.adapter.BaseAdapter
 import me.rosuh.filepicker.adapter.FileListAdapter
@@ -174,11 +174,16 @@ class FilePickerActivity : AppCompatActivity(), View.OnClickListener,
         initView()
         // 核验权限
         // checking permission
-        if (isPermissionGrated()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             loadList()
         } else {
-            requestPermission()
+            if (isPermissionGrated()) {
+                loadList()
+            } else {
+                requestPermission()
+            }
         }
+
     }
 
     override fun onDestroy() {

@@ -73,8 +73,8 @@ class RecyclerViewListener(
     private val checkBoxLeft = screenWidth * (1 - 0.1370)
 
     inner class ItemTouchHelperGestureListener : GestureDetector.SimpleOnGestureListener() {
-        override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            val childView = recyclerView.findChildViewUnder(e!!.x, e.y)
+        override fun onSingleTapUp(e: MotionEvent): Boolean {
+            val childView = recyclerView.findChildViewUnder(e.x, e.y)
             childView ?: return false
             when (childView.id) {
                 R.id.item_list_file_picker -> {
@@ -104,8 +104,8 @@ class RecyclerViewListener(
             return true
         }
 
-        override fun onLongPress(e: MotionEvent?) {
-            val childView = recyclerView.findChildViewUnder(e!!.x, e.y)
+        override fun onLongPress(e: MotionEvent) {
+            val childView = recyclerView.findChildViewUnder(e.x, e.y)
             childView ?: return
             when (childView.id) {
                 R.id.item_list_file_picker -> {
