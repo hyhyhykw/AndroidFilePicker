@@ -337,7 +337,7 @@ class FilePickerActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     private fun loadList() {
-        if (!isPermissionGrated()) {
+        if (!isPermissionGrated()&&Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
             requestPermission()
             return
         }
